@@ -1,0 +1,24 @@
+digraph grafo2{ 
+node[ style=filled ,color="#A3F8E9"];
+2[label="AGENDA"]
+4[label="Melanie
+Castañeda
+1234"]
+2->4
+4->2
+6[label="Marlon 
+Figueroa
+0954"]
+4->6
+6->4
+8[label="Jonathan
+Figueroa
+78465"]
+6->8
+8->6
+10[label="Jose
+Lopez
+4567"]
+8->10
+10->8
+}
