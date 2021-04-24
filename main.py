@@ -81,6 +81,104 @@ def OP3():
     CONTACTOS.visualizar()
     webbrowser.open_new_tab('AGENDA.png')
 
+def OP4():
+    os.system('cls')
+    print("------------------ Primer Contacto ------------------")
+    print ("")
+    CONTACTOS.obtener_primero()
+
+def OP5():
+    os.system('cls')
+    print("------------------ Ultimo Contacto ------------------")
+    print ("")
+    CONTACTOS.obtener_ultimo()
+
+def OP6():
+    os.system('cls')
+    print("------------------  Modificar Contacto ------------------")
+    print ("")
+    print("-Ingrese Número de Contacto\n")
+    numero=input("   >>  ")
+
+    condicion2=True
+    while condicion2:
+        if numero!="":
+            if CONTACTOS.buscar2(numero)==False:
+                print("")
+                print("----Ingrese los nuevos datos----")
+                print("Nombre:")
+                nombre=input("              >>  ")
+                print("Apellido:")
+                apellido=input("              >>  ")
+                print("Numero:")
+                numero_nuevo=input("              >>  ")
+                if nombre!="" and apellido!="" and numero_nuevo!="":
+                    CONTACTOS.Modificar(nombre,apellido,numero,numero_nuevo)
+                    print("Se modificó correctamente")
+                else:
+                    print("*Debe de llenar todos los campos")
+                    OP6() 
+
+            else:
+                print("El numero de teléfono no existe ¿ Desea agregarlo ?")
+                print("\n1-SI")
+                print("2-NO\n")
+                opcion=input("              >>  ")
+                if opcion=="1":
+                    print ("")
+                    OP1()
+                elif opcion=="2":
+                    MENU()
+                else:
+                    print ("***ERROR****")
+                    os.system('cls')
+                    input("No has pulsado ninguna opción correcta...\npulsa enter para volver...")
+            condicion2=False
+        else:
+            print("*Debe de llenar todos los campos")
+            OP6() 
+
+def OP7():
+    os.system('cls')
+    print("------------------ Eliminar contacto ------------------")
+    print ("")
+    print("-Ingrese Número\n")
+    numero=input("   >>  ")
+
+    condicion2=True
+    while condicion2:
+        if numero!="":
+            if CONTACTOS.buscar2(numero)==False:
+                if numero!="":
+                    if CONTACTOS.size==1:
+                        CONTACTOS.eliminar_inicio()
+                        print("Se eliminó correctamente")
+                    else:
+                        CONTACTOS.eliminar(numero)
+                        print("Se eliminó correctamente")
+                else:
+                    print("*Debe de llenar todos los campos")
+                    OP7() 
+
+            else:
+                print("El numero de teléfono no existe ¿ Desea agregarlo ?")
+                print("\n1-SI")
+                print("2-NO\n")
+                opcion=input("              >>  ")
+                if opcion=="1":
+                    print ("")
+                    OP1()
+                elif opcion=="2":
+                    MENU()
+                else:
+                    print ("***ERROR****")
+                    os.system('cls')
+                    input("No has pulsado ninguna opción correcta...\npulsa enter para volver...")
+            condicion2=False
+        else:
+            print("*Debe de llenar todos los campos")
+            OP7() 
+
 def MENU():	
     os.system('cls')
     print("___________________________________________________________________________________")
@@ -88,7 +186,11 @@ def MENU():
     print ("        \t              1 - Ingresar Nuevo Contacto          ")
     print ("        \t              2 - Buscar Contacto          ")
     print ("        \t              3 - Visualizar Agenda          ")
-    print ("        \t              4 - Salir")
+    print ("        \t              4 - Visualizar Primer Contacto          ")
+    print ("        \t              5 - Visualizar Ultimo Contacto          ")
+    print ("        \t              6 - Modificar Contacto          ")
+    print ("        \t              7 - Eliminar Contacto          ")
+    print ("        \t              8 - Salir")
     print("___________________________________________________________________________________")
 
 while True:
@@ -110,6 +212,26 @@ while True:
         OP3()
         input("\npulsa enter para volver...")
     elif op=="4":
+        print ("")
+        os.system('cls')
+        OP4()
+        input("\npulsa enter para volver...")
+    elif op=="5":
+        print ("")
+        os.system('cls')
+        OP5()
+        input("\npulsa enter para volver...")
+    elif op=="6":
+        print ("")
+        os.system('cls')
+        OP6()
+        input("\npulsa enter para volver...")
+    elif op=="7":
+        print ("")
+        os.system('cls')
+        OP7()
+        input("\npulsa enter para volver...")    
+    elif op=="8":
         os.system('cls')
         break
     else:

@@ -17,6 +17,15 @@ class Lista_Doblemente():
             self.ultimo=aux.siguiente=Nodo(nombre,apellido,telefono)
             self.ultimo.anterior=aux
         self.size+=1
+
+    def tam(self):
+        cont=0
+        aux=self.primero
+        while aux:
+            cont+=1
+            aux=aux.siguiente
+        return cont
+
     def recorrer_lista(self):
         print("---LISTA DE CONTACTOS---")
         aux=self.primero
@@ -52,8 +61,10 @@ class Lista_Doblemente():
 
     def CNodo(self,id,contacto):
         return (id+"[label=\""+contacto+"\"]\n")
+
     def UnirNodo(self,A,B):
         return (A+"->"+B+"\n")
+
     def visualizar(self):
         #generando grafo
         aux=self.primero
@@ -75,3 +86,88 @@ class Lista_Doblemente():
             f.write("}\n");
         os.system('dot -Tpng agenda.dot -o AGENDA.png');
 
+    def obtener_primero(self):
+        aux=self.primero
+        while aux:
+            print("-Nombre:"+ aux.nombre)
+            print("-Apellido:"+ aux.apellido)
+            print("-telefono:"+ str(aux.telefono))
+            break
+
+    def obtener_ultimo(self):
+        aux=self.primero
+        while aux:
+            if aux.siguiente==None:
+                print("-Nombre:"+ aux.nombre)
+                print("-Apellido:"+ aux.apellido)
+                print("-telefono:"+ str(aux.telefono))
+                break
+            aux=aux.siguiente
+
+    def Modificar(self,nombre,apellido,numero,nuevo):
+        aux=self.primero
+        while aux:
+            if numero!=aux.telefono:
+                aux=aux.siguiente
+            else:
+                aux.nombre=nombre
+                aux.apellido=apellido
+                aux.telefono=nuevo
+                break
+
+
+    def eliminar(self,numero):
+        #buscando numero
+        aux=self.primero
+        eliminado=False
+
+        if aux.siguiente is None:
+            eliminado=False
+        elif aux.telefono==numero:
+            self.primero=aux.siguiente
+            self.primero.anterior=None
+            eliminado=True
+        elif self.ultimo.telefono==numero:
+            self.ultimo=self.ultimo.anterior
+            self.ultimo.siguiente=None
+            eliminado=True
+        else:
+            while aux:
+                if aux.telefono==numero:
+                    aux.anterior.siguiente=aux.siguiente
+                    aux.siguiente.anterior=aux.anterior
+                    eliminado=True
+                aux=aux.siguiente
+        if eliminado:
+            self.size-=1
+                
+    def buscar2(self,numero):
+        #buscando numero
+        aux=self.primero
+        while aux:
+            if numero!=aux.telefono:
+                aux=aux.siguiente
+            else:
+                return False
+
+    def eliminar_inicio(self):
+        if self.vacia():
+            print("esta vacia")
+        elif  self.primero.siguiente==None:
+            self.primero=self.ultimo=None
+            self.size=0
+        else:
+            self.primero=self.primero.siguiente
+            self.primero.anterior=None
+            self.size-=1
+
+    def eliminar_final(self):
+        if self.vacia():
+            print("esta vacia")
+        elif  self.primero.siguiente==None:
+            self.primero=self.ultimo=None
+            self.size=0
+        else:
+            self.ultimo=self.ultimo.anterior
+            self.ultimo.siguiente=None
+            self.size-=1
